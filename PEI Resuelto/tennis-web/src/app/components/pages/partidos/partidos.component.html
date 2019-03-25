@@ -1,0 +1,35 @@
+<h1>Partidos</h1>
+
+<div class="mb-3">
+  <a routerLink="/partidos/add">
+    Agregar Partido
+  </a>
+</div>
+
+<div *ngIf="mensajeError" class="alert alert-danger">{{mensajeError}}</div>
+
+<table class="table">
+  <tr>
+    <th>Id</th>
+    <th>Fecha/Hora de inicio</th>
+    <th>Jugador Local</th>
+    <th>Jugador Visitante</th>
+    <th>Cancha</th>
+    <th>Estado</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let partido of partidos">
+      <td>{{ partido.id }}</td>
+      <td>{{ partido.fechaComienzo | date:'yyyy/MM/dd HH:mm' }}</td>
+      <td>{{ partido.jugadorLocal.nombre }}</td>
+      <td>{{ partido.jugadorVisitante.nombre }}</td>
+      <td>{{ partido.cancha.nombre }}</td>
+      <td>{{ partido.estado }}</td>
+      <td class="text-right">
+          <button *ngIf='partido.estado == estados.NoIniciado || partido.estado == estados.EnCurso' class="btn btn-primary" (click)="iniciarPartido(partido.id)">Jugar</button>
+          <a *ngIf='partido.estado == estados.NoIniciado' class="btn btn-primary" [routerLink]="['edit', partido.id]">Editar</a>
+          <a *ngIf='partido.estado == estados.Finalizado' class="btn btn-primary" [routerLink]="['tablero', partido.id]">Ver</a>
+          <button *ngIf='partido.estado == estados.NoIniciado' class="btn btn-danger" (click)="removePartido(partido.id)">Eliminar</button>
+      </td>
+  </tr>
+</table>

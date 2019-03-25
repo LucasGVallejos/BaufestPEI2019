@@ -1,0 +1,34 @@
+<h1>Tablero</h1>
+
+<div *ngIf="mensajeError" class="alert alert-danger">{{mensajeError}}</div>
+
+<table class="table" *ngIf="tablero">
+  <tr>
+    <th>Jugador</th>
+    <th>Game actual</th>
+    <th>Games</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>{{ tablero.jugadorLocal.nombre }}</td>
+    <td>{{ tablero.puntosGameActualLocal }}</td>
+    <td>{{ tablero.cantidadGamesLocal }}</td>
+    <td class="text-right">
+      <button *ngIf='tablero.estado == estados.NoIniciado || tablero.estado == estados.EnCurso' class="btn btn-primary"
+        (click)="sumarPuntos(modoJugador.Local)">Sumar punto</button>
+    </td>
+  </tr>
+  <tr>
+    <td>{{ tablero.jugadorVisitante.nombre }}</td>
+    <td>{{ tablero.puntosGameActualVisitante }}</td>
+    <td>{{ tablero.cantidadGamesVisitante }}</td>
+    <td class="text-right">
+      <button *ngIf='tablero.estado == estados.NoIniciado || tablero.estado == estados.EnCurso' class="btn btn-primary"
+        (click)="sumarPuntos(modoJugador.Visitante)">Sumar punto</button>
+    </td>
+  </tr>
+</table>
+
+<a routerLink="/partidos" class="btn btn-primary mt-3 float-right">
+  Volver
+</a>

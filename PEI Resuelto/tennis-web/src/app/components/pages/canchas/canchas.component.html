@@ -1,0 +1,27 @@
+<h1>Canchas</h1>
+
+<div class="mb-3">
+  <a routerLink="/canchas/add">
+    Agregar Cancha
+  </a>
+</div>
+
+<table class="table">
+  <tr>
+    <th>Id</th>
+    <th>Nombre</th>
+    <th>Dirección</th>
+    <th>Partidos hoy</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let cancha of canchas">
+    <td>{{ cancha.id }}</td>
+    <td>{{ cancha.nombre }}</td>
+    <td>{{ cancha.direccion }}</td>
+    <td>{{ cancha.partidosEnElDia }}</td>
+    <td class="text-right">
+      <a class="btn btn-primary" [routerLink]="['edit', cancha.id]">Editar</a>
+      <button class="btn btn-danger" (click)="removeCancha(cancha.id)">Eliminar</button>
+    </td>
+  </tr>
+</table>

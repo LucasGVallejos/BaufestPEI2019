@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+.Header{
+  margin: auto;
+  width: 500px;
+}
+*{
+  margin:0px;
+  padding:0px;
+  list-style:none;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-decoration: none; 
+}
+  .menuDesplegable > li { /*se especifica que solo los li que sean descendientes directos del primer ul tengan float: left*/
+    float:left;
+  }
+  
+  .menuDesplegable li a {
+    background-color:#000;
+    color:#fff;
+    border: 1px solid;
+    padding:10px 12px;
+    display:block;
+  }
+  
+  .menuDesplegable li a:hover {
+    background-color:#434343;
+  }
+  
+  .menuDesplegable li ul {
+    display:none;
+    position:absolute;
+    min-width:140px;
+  }
+  
+  .menuDesplegable li:hover ul {
+    display:block;
+  }
+  
+  .menuDesplegable li ul li {
+    position:relative;
+  }
+  
+  .menuDesplegable li ul li ul {
+    right:-140px;
+    top:0px;
+  }
+
+body {
+    background-color: #B7BBBF;
+  }

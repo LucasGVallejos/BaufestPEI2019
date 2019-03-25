@@ -1,0 +1,417 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: tenis-api
+  description: Ejercicio Integrador Tenis PEI Desarrollo Full Stack - Marzo - 2019
+basePath: /api/v1
+tags:
+  - name: Jugador
+    description: Jugador endpoints
+  - name: Partido
+    description: Partido endpoints
+  - name: Cancha
+    description: Cancha endpoints
+  - name: SumadorPuntos
+    description: SumadorPuntos endpoints
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+
+definitions:
+  Jugador:
+    type: object
+    title: jugador
+    properties:
+      id:
+        type: number
+        example: 1      
+      nombre:
+        type: string
+        example: Juan
+      puntos:
+        type: number
+        example: 30
+  PartidoSaveRequest:
+    type: object
+    title: partido
+    properties:
+      fechaComienzo:
+        type: string
+        format: date-time
+        example: 2019-03-27
+      jugadorLocal:
+        type: object
+        properties:
+          id:
+            type: number
+            example: 1
+      jugadorVisitante:
+        type: object
+        properties:
+          id:
+            type: number
+            example: 1
+  Cancha:
+    type: object
+    title: Cancha
+    properties:
+      id:
+        type: number
+        example: 1      
+      nombre:
+        type: string
+        example: Cancha
+  Partido:
+    type: object
+    title: partido
+    properties:
+      id:
+        type: number
+        example: 1
+      fechaComienzo:
+        type: string
+        format: date
+        example: 2019-03-27 21:35:00
+      estado:
+        type: string
+        enum: [EnCurso, NoIniciado, Finalizado]
+        example: NO INICIADO
+      jugadorLocal:
+        $ref: "#/definitions/Jugador"
+      scoreLocal:
+        type: number
+        example: 15
+      puntosGameActualLocal:
+        type: string
+        example: 0
+      cantidadGamesLocal:
+        type: number
+        example: 0
+      jugadorVisitante:
+        $ref: "#/definitions/Jugador"
+      scoreVisitante:
+        type: number
+        example: 30
+      puntosGameActualVisitante:
+        type: string
+        example: 0
+      cantidadGamesVisitante:
+        type: number
+        example: 0
+      cancha:
+        $ref: "#/definitions/Cancha"
+  PuntoRequest:
+    type: object
+    title: puntoRequest
+    properties:
+      partidoId:
+        type: number
+        example: 1
+      modoJugador:
+        type: string
+        enum: [Local, Visitante]
+        example: Local
+
+paths:
+  /jugadores:
+    get:
+      tags:
+        - Jugador
+      description: Lista de todos los jugadores.
+      responses:
+        200:
+          schema:
+            type: array
+            items: 
+              $ref: "#/definitions/Jugador"
+    post:
+      tags:
+        - Jugador
+      description: Crear un nuevo jugador
+      parameters:
+        - name: jugador
+          in: body
+          description: un jugador
+          required: true
+          schema: 
+            $ref: "#/definitions/Jugador"
+      responses:
+        200:
+          description: Retorna el jugador creado
+          schema:
+            type: object
+            $ref: "#/definitions/Jugador"
+  /jugadores/{id}:
+    get:
+      tags:
+        - Jugador
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: El id del jugador a obtener
+          type: integer
+      responses:
+        200:
+          description: Retorna el jugador por id
+          schema:
+            type: object
+            $ref: "#/definitions/Jugador"
+        404:
+          description: Jugador not found
+    put:
+      tags:
+        - Jugador
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: El id del jugador a editar
+          type: integer
+        - name: jugador
+          in: body
+          description: un jugador
+          required: true
+          schema: 
+            $ref: "#/definitions/Jugador"
+      responses:
+        200:
+          description: Retorna el jugador actualizado
+          schema:
+            type: object
+            $ref: "#/definitions/Jugador"
+        404:
+          description: Jugador not found
+    delete:
+      tags:
+        - Jugador
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: El id del jugador a eliminar
+          type: integer
+      responses:
+        200:
+          description: Retorna el jugador eliminado
+          schema:
+            type: object
+            $ref: "#/definitions/Jugador"
+        404:
+          description: Jugador not found
+
+  /partidos:
+    get:
+      tags:
+        - Partido
+      description: Lista de todos los partidos.
+      responses:
+        200:
+          description: Retorna el listado de partidos
+          schema:
+            type: array
+            items: 
+              $ref: "#/definitions/Partido"
+    post:
+      tags:
+        - Partido
+      description: Crear un nuevo partido
+      parameters:
+        - name: partido
+          in: body
+          description: un partido
+          required: true
+          schema: 
+            $ref: "#/definitions/PartidoSaveRequest"
+      responses:
+        200:
+          description: Retorna el partido creado
+          schema:
+            type: object
+            $ref: "#/definitions/Partido"
+  /partidos/{id}:
+    get:
+      tags:
+        - Partido
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: El id del partido a obtener
+          type: integer
+      responses:
+        200:
+          description: Retorna el partido por id
+          schema:
+            type: object
+            $ref: "#/definitions/Partido"
+        404:
+          description: Partido not found
+    put:
+      tags:
+        - Partido
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: El id del partido a editar
+          type: integer
+        - name: partido
+          in: body
+          description: un partido
+          required: true
+          schema: 
+            $ref: "#/definitions/PartidoSaveRequest"
+      responses:
+        200:
+          description: Retorna el partido actualizado
+          schema:
+            type: object
+            $ref: "#/definitions/Partido"
+        404:
+          description: Partido not found
+    delete:
+      tags:
+        - Partido
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: El id del partido a eliminar
+          type: integer
+      responses:
+        200:
+          description: Retorna el partido eliminado
+          schema:
+            type: object
+            $ref: "#/definitions/Partido"
+        404:
+          description: Partido not found
+  /partidos/{id}/actions/init:
+    put:
+      tags:
+        - Partido
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: El id del partido a iniciar
+          type: integer
+      responses:
+        200:
+          description: Retorna el partido actualizado
+          schema:
+            type: object
+            $ref: "#/definitions/Partido"
+        404:
+          description: Partido not found
+
+  /canchas:
+    get:
+      tags:
+        - Cancha
+      description: Lista de todos las canchas.
+      responses:
+        200:
+          schema:
+            type: array
+            items: 
+              $ref: "#/definitions/Cancha"
+    post:
+      tags:
+        - Cancha
+      description: Crear una nueva cancha
+      parameters:
+        - name: Cancha
+          in: body
+          description: una cancha
+          required: true
+          schema: 
+            $ref: "#/definitions/Cancha"
+      responses:
+        200:
+          description: Retorna la cancha creada
+          schema:
+            type: object
+            $ref: "#/definitions/Cancha"
+  /canchas/{id}:
+    get:
+      tags:
+        - Cancha
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: El id de la cancha a obtener
+          type: integer
+      responses:
+        200:
+          description: Retorna la cancha por id
+          schema:
+            type: object
+            $ref: "#/definitions/Cancha"
+        404:
+          description: Cancha not found
+    put:
+      tags:
+        - Cancha
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: El id de la cancha a editar
+          type: integer
+        - name: cancha
+          in: body
+          description: una cancha
+          required: true
+          schema: 
+            $ref: "#/definitions/Cancha"
+      responses:
+        200:
+          description: Retorna la cancha actualizada
+          schema:
+            type: object
+            $ref: "#/definitions/Cancha"
+        404:
+          description: Cancha not found
+    delete:
+      tags:
+        - Cancha
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: El id de la cancha a eliminar
+          type: integer
+      responses:
+        200:
+          description: Retorna la cancha eliminada
+          schema:
+            type: object
+            $ref: "#/definitions/Cancha"
+        404:
+          description: Cancha not found
+
+  /sumador-de-puntos:
+    post:
+      tags:
+        - SumadorPuntos
+      parameters:
+        - name: puntoRequest
+          in: body
+          description: modificaciones al score del partido
+          required: true
+          schema: 
+            $ref: "#/definitions/PuntoRequest"
+      responses:
+        200:
+          description: Retorna el partido actualizado
+          schema:
+            type: object
+            $ref: "#/definitions/Partido"
+        404:
+          description: Partido not found

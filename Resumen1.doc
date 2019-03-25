@@ -1,0 +1,70 @@
+Tenis_Web
+
+Pasos para generar una entidad y sus componentes
+
+1- Se crea la clase en la carpeta “models”.
+2- Se crean sus componentes con 	ng generate component “nombre”.
+3- Se crea su servicio con 		ng generate service “nombre”.
+4- Se inyecta el servicio en todos los componentes.
+5- Modificar las rutas en “app-module.ts”.
+6- Agregarlo en el HTML (app.comp).
+
+Completar componentes de la entidad
+
+1- Ir al entidad.ts y copiar furiosamente la estructura de otra entidad (Ej. Jugador).
+2- Agregar las funciones de (Ej.) Jugador.service a la entidad.service.
+3- Ir al HTML de la entidad y copiar furiosamente la estructura de otra entidad (Ej. Jugador).
+4- Poner el path del componente en app-routing.module.ts
+
+Agregar un componente y funcionalidad a una entidad
+
+1- Agregar la correspondiente estructura en el HTML de la entidad
+2- Modificamos entidad.ts en el back y en el front agregandole el nuevo atributo
+
+
+ACLARACION IMPORTANTE - VER SI HAY FORMs
+
+1- Generar en “partials” un componente entidad-form
+2- Modificar rutas en app-module
+3- Copiar estructura de ts y html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tennis-API
+Pasos para generar una entidad y sus componentes
+
+1- Se crea la clase en model
+2- Se crea una carpeta en controllers para:
+
+	router.ts y controller.ts
+	en controller.ts se incluyen las funciones get, save, remove, getall, update
+	en router.ts se copypastea fuerte
+ 	se crea el servicio en api/services
+
+1- Se la copia de otra
+2- Aca van las funciones que interactuan con el repositorio
+3- Se crea un repositorio en api/repositories
+4- estan las funciones del repo que interactuan con la base de datos
+
+		OBS: cuando diga que el servidor 3000 se este usando, ejecutar las sig lineas en tenis-api:
+netstat -nip | grep :3000
+kill pid

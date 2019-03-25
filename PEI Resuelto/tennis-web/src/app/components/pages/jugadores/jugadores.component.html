@@ -1,0 +1,26 @@
+<h1>Jugadores</h1>
+
+<div class="mb-3">
+  <a routerLink="/jugadores/add">
+    Agregar Jugador
+  </a>
+</div>
+
+<table class="table">
+  <tr>
+    <th>Id</th>
+    <th>Nombre</th>
+    <th>Puntos</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let jugador of jugadores">
+    <td>{{ jugador.id }}</td>
+    <td>{{ jugador.nombre }}</td>
+    <td>{{ jugador.puntos }}</td>
+    <td class="text-right">
+      <button class="btn btn-primary" (click)="recalcularRanking(jugador.id)">Recalcular ranking</button>
+      <a class="btn btn-primary" [routerLink]="['edit', jugador.id]">Editar</a>
+      <button class="btn btn-danger" (click)="removeJugador(jugador.id)">Eliminar</button>
+    </td>
+  </tr>
+</table>

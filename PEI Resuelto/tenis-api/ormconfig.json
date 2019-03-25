@@ -1,0 +1,11 @@
+{
+    "type": "mssql",
+    "host": "localhost",
+    "port": 1433,
+    "username": "pei",
+    "password": "Peifullstack2019",
+    "database": "tenisdb",
+    "synchronize": true,
+    "entities": ["./server/api/model/*{.ts,.js}"],
+    "logging": true
+  }
