@@ -68,3 +68,6 @@ Pasos para generar una entidad y sus componentes
 		OBS: cuando diga que el servidor 3000 se este usando, ejecutar las sig lineas en tenis-api:
 netstat -nip | grep :3000
 kill pid
+
+5- Agregar la ruta en server -> routes.ts
+6- Actualizar el archivo “apiyam.ml” en server-api-common-swagger
